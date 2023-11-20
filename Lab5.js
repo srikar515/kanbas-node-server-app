@@ -158,6 +158,12 @@ const Lab5 = (app)=>{
       app.get('/a5/todos/:id/title/:title', (req, res) => {
         const { id, title } = req.params;
         const todo = todos.find((t) => t.id === parseInt(id));
+        if (!todo) {
+          res.status(404).json({
+            message: `Unable to find the Todo with ID ${id} to update title`,
+          });
+          return;
+        }
         todo.title = title;
         res.json(todos);
       });
@@ -165,6 +171,12 @@ const Lab5 = (app)=>{
       app.get('/a5/todos/:id/completed/:completed', (req, res) => {
         const { id, completed } = req.params;
         const todo = todos.find((t) => t.id === parseInt(id));
+        if (!todo) {
+          res.status(404).json({
+            message: `Unable to find the Todo with ID ${id} to update state`,
+          });
+          return;
+        }
         todo.completed = completed === 'true';
         res.json(todos);
       });
@@ -172,6 +184,12 @@ const Lab5 = (app)=>{
       app.get('/a5/todos/:id/description/:description', (req, res) => {
         const { id, description } = req.params;
         const todo = todos.find((t) => t.id === parseInt(id));
+        if (!todo) {
+          res.status(404).json({
+            message: `Unable to find the Todo with ID ${id} to update description`,
+          });
+          return;
+        }
         todo.description = description;
         res.json(todos);
       });
